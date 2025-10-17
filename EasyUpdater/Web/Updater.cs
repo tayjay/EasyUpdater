@@ -16,27 +16,6 @@ namespace EasyUpdater.Web
             _client = new HttpClient();
         }
         
-        public async Task DownloadFileAsync(string fileUrl, string destinationPath)
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    // Get the file content as a byte array
-                    byte[] fileBytes = await client.GetByteArrayAsync(fileUrl);
-
-                    // Write the byte array to the destination file
-                    File.WriteAllBytes(destinationPath, fileBytes);
-
-                    Console.WriteLine($"✅ File downloaded successfully to: {destinationPath}");
-                }
-                catch (HttpRequestException e)
-                {
-                    Console.WriteLine($"\n❌ Error downloading file: {e.Message}");
-                }
-            }
-        }
-        
         public void CheckForUpdates(Dictionary<LabApi.Loader.Features.Plugins.Plugin, List<WebPlugin>> plugins)
         {
             foreach (var kvp in plugins)
@@ -56,7 +35,7 @@ namespace EasyUpdater.Web
                                 Logger.Info($"Download it from: {updateUrl}");
                                 if (Plugin.Instance.Config.AutoUpdate)
                                 {
-                                    
+                                    // Todo: Download and replace the file
                                 }
                             }
                             else
